@@ -1,0 +1,17 @@
+1.
+S3 Bucket jest pojemnikiem na objekty w amazonowym S3, może przechowywać nieograniczoną ilość elementów.
+Przy czym jedno konto może mieć jednocześnie utworzonych tylko 100 bucketów na raz. Można dotrzeć do zawartości bucketu używając linku url.
+Link ten zawiera w sobie nazwę bucketu jak i region w którym został on utworzony oraz nazwę pliku np. zdjęcie.jpg.
+W odróznieniu do Azure blob storage gdzie obiekty są przechowywane na koncie użytkownika, S3 bucket wykorzystuje tak jak nazwa wskazuje buckets, które są zapisywane na pamięci konta AWS.
+Rożnią się też ceną, S3 bucket jest ogólnie tańszy w utrzymaniu. Patrząc na to jak nasze zapisane dane są kategoryzowane, aws oferuje szersze spektrum wyboru w zależnosci od potrzeb (6 tierów vs Microsoftowe 3 tiery).
+Największą różnicą jest jednak ilość miejsca - Blob storage ma maksymalny rozmiar 500TB, podczas gdy S3 bucket nie ma ograniczenia.
+Podsumowując plusami S3 bucket są:
+- przystępna cena
+- duża możliwość dobierania usługi do potrzeb
+- pamięć niegraniczenie skalowalna
+
+Minusy:
+- dodatkowy support jest płatny
+- bywa mało czytelny dla użytkownika
+
+2.
