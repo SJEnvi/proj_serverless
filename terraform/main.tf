@@ -1,34 +1,34 @@
 resource "aws_s3_bucket" "example" {
-  bucket = "my-new-bucket"
+  bucket = var.bucket_name
 
   tags = {
-    Name        = "my-new-bucket"
-    Environment = "Dev"
+    Name        = var.bucket_name
+    Environment = var.env_type
   }
 }
 
 
 resource "aws_s3_bucket_acl" "example" {
   bucket = aws_s3_bucket.example.id
-  acl    = "public-read"
+  acl    = var.acl_public
 }
 
 resource "aws_s3_object" "index" {
-  source = "www/index.html"
-  content_type = "text/html"
-  etag = filemd5("www/index.html")
-  acl = "public-read"
+  source = var.index_source
+  content_type = var.type_html
+  etag = filemd5(var.index_source)
+  acl = var.acl_public
   bucket = aws_s3_bucket.example.bucket
-  key    = "index.html"
+  key    = var.index_key
 }
 
 resource "aws_s3_object" "error" {
   bucket = aws_s3_bucket.example.bucket
-  key    = "error.html"
-  source = "www/error.html"
-  content_type = "text/html"
-  etag = filemd5("www/error.html")
-  acl = "public-read"
+  key    = var.error_key
+  source = var.error_source
+  content_type = var.type_html
+  etag = filemd5(var.error_source)
+  acl = var.acl_public
 }
 
 resource "aws_s3_bucket_website_configuration" "example" {
@@ -39,18 +39,7 @@ resource "aws_s3_bucket_website_configuration" "example" {
 
   error_document {
     key = aws_s3_object.error.key
-}
-  routing_rules = <<EOF
-[{
-    "Condition": {
-        "KeyPrefixEquals": "docs/"
-    },
-    "Redirect": {
-        "ReplaceKeyPrefixWith": ""
-    }
-}]
-EOF
-
+  }
 }
 
 
